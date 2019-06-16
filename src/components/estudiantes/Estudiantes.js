@@ -112,6 +112,7 @@ class Estudiantes extends Component {
                     className="form-control"
                     id="apellido"
                     placeholder="Apellido"
+                    
                   />
                 
                 </div>
