@@ -99,7 +99,7 @@ class Estudiantes extends Component {
           <div className="row">
             <div className="col-6">
               <form  id="formEstudiantes" className="mt-5">
-              <label> Agregar Estudiantes</label>
+              <label> Agregando Estudiantes</label>
                 <div className="form-group">
                   <input
                     onChange = {(text) => {
