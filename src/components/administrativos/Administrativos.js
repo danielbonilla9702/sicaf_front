@@ -76,6 +76,10 @@ class Administrativos extends Component {
     
   }
 
+  limpiarFormulario(){
+    document.getElementById("formAdminis").reset();
+  }
+
   
   
   render() {
@@ -87,7 +91,7 @@ class Administrativos extends Component {
         
           <div className="row">
             <div className="col-6">
-              <form className="mt-5">
+              <form id="formAdminis" className="mt-5">
               <label> Agregar Administrativos</label>
                 <div className="form-group">
                   <input
@@ -350,6 +354,7 @@ class Administrativos extends Component {
                   className="btn btn-success"
                   onClick={() => {
                     this.agregarAdministrativo();
+                    this.limpiarFormulario()
                    
                     
                   }}

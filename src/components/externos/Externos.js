@@ -76,6 +76,11 @@ class Externos extends Component {
     
   }
 
+  limpiarFormulario(){
+    document.getElementById("formExterno").reset();
+  }
+
+
   
   
   render() {
@@ -87,7 +92,7 @@ class Externos extends Component {
         
           <div className="row">
             <div className="col-6">
-              <form className="mt-5">
+              <form id="formExterno" className="mt-5">
               <label> Agregar Externos </label>
                 <div className="form-group">
                   <input
@@ -335,7 +340,7 @@ class Externos extends Component {
                   className="btn btn-success"
                   onClick={() => {
                     this.agregarExternos();
-                   
+                    this.limpiarFormulario();
                     
                   }}
                 >

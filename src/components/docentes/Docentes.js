@@ -76,6 +76,11 @@ class Docentes extends Component {
     
   }
 
+  limpiarFormulario(){
+    document.getElementById("formDoc").reset();
+  }
+
+
   
   
   render() {
@@ -87,7 +92,7 @@ class Docentes extends Component {
         
           <div className="row">
             <div className="col-6">
-              <form className="mt-5">
+              <form id="formDoc" className="mt-5">
               <label> Agregar Docentes</label>
                 <div className="form-group">
                   <input
@@ -350,6 +355,7 @@ class Docentes extends Component {
                   className="btn btn-success"
                   onClick={() => {
                     this.agregarDocente();
+                    this.limpiarFormulario();
                    
                     
                   }}

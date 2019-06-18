@@ -80,6 +80,13 @@ class Estudiantes extends Component {
     
   }
 
+  limpiarFormulario(){
+
+    document.getElementById("formEstudiantes").reset();
+  }
+
+
+
   
   
   render() {
@@ -91,7 +98,7 @@ class Estudiantes extends Component {
         
           <div className="row">
             <div className="col-6">
-              <form className="mt-5">
+              <form  id="formEstudiantes" className="mt-5">
               <label> Agregar Estudiantes</label>
                 <div className="form-group">
                   <input
@@ -355,6 +362,7 @@ class Estudiantes extends Component {
                   className="btn btn-success"
                   onClick={() => {
                     this.agregarEstudiante();
+                    this.limpiarFormulario();
                     
                    
                     

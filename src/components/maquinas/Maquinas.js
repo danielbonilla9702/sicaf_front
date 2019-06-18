@@ -64,6 +64,11 @@ class Maquinas extends Component {
     })
   }
 
+  limpiarFormulario(){
+    document.getElementById("formMaq").reset();
+  }
+
+
   render() {
     return (
       <div>
@@ -73,7 +78,7 @@ class Maquinas extends Component {
         
           <div className="row">
             <div className="col-6">
-              <form className="mt-5">
+              <form id="formMaq" className="mt-5">
               <label> Agregar Maquinas</label>
                 <div className="form-group">
                   <input
@@ -150,6 +155,7 @@ class Maquinas extends Component {
                   className="btn btn-success"
                   onClick={() => {
                     this.agregarMaquinas();
+                    this.limpiarFormulario();
                   }}
                 >
                   Agregar
