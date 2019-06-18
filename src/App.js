@@ -88,15 +88,17 @@ class App extends Component{
     .then(result => console.log(`${result.user.email} ha cerrado sesión`))
     .catch(error => console.log(`Error ${error.code}: ${error.message}`))
   }
+
+  
   render(){
     
     return (
       <BrowserRouter>
       <div className="App">
-      
+    
         <NavBar />
         <br/>
-         {this.renderLoginButton()}
+        {this.renderLoginButton()}
       
         <Route path='/agregar_estudiantes' component={Estudiantes} />
         <Route path='/agregar_administrativos' component={Administrativos} />
