@@ -64,7 +64,7 @@ class App extends Component{
     }else {
       //usuario no logeado
       return(
-        <div align="center"> <button className="btn btn-success" onClick={this.handleAuth}>Login con Google</button></div>
+        <div align="center"> <button className="btn btn-success" onClick={this.handleAuth}>Ingresa con tu cuenta de Google</button></div>
      
       );
     }

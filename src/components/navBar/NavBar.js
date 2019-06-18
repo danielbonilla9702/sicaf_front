@@ -34,7 +34,7 @@ class NavBar extends Component {
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/agregar_maquinas">
-                  Maquinas
+                  Máquinas
                 </a>
               </li>
               <li className="nav-item">
