@@ -1,7 +1,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import './App.css';
@@ -32,11 +32,34 @@ if(!firebase.apps.length)
   firebase.initializeApp(firebaseConfig);
 
 let firestore = firebase.firestore();
+
+class Redirigir extends Component{
+  render(){
+    return(
+      <Redirect to=""/>
+    )
+  }
+}
+
+class Cargando extends Component{
+  render(){
+    return(
+      <div className="mt-5" align="center">
+      <div className="spinner-border text-success" role="status">
+  <span className="sr-only">Cargando...</span>
+</div>
+</div>
+    )
+  }
+}
+
 class App extends Component{
   constructor(){
   super();
   this.state={
-   user: null 
+   user: null ,
+   mostrar: false,
+   loading: true
   };
  this.handleAuth = this.handleAuth.bind(this);
  this.handleLogout = this.handleLogout.bind(this);
@@ -47,20 +70,34 @@ class App extends Component{
     firebase.auth().onAuthStateChanged(user => {
 
       this.setState({ user})
+      if(user)
+        this.setState({mostrar: true, loading: false})
+      else{
+        this.setState({mostrar: false, loading: false})
+      }
+      
     });
   }
 
   renderLoginButton(){
-    //usuario logeado
+   
     if(this.state.user){
-
+        //usuario logeado
       return(
+        
       <div align="center">
-        <img src={this.state.user.photoURL} className="rounded mx-auto d-block" alt={this.state.user.displayName} />
-        <div className="alert alert-success" role="alert" align="center"> Hola {this.state.user.displayName}!</div>
+       {/* <div className="mt--10">{!this.state.mostrar?
+          <NavBar /> 
+          :null}
+          </div> */}
+        <img width="150px" height="150px" src={this.state.user.photoURL} className="rounded mx-auto d-block md-2" alt={this.state.user.displayName} />
+        <div className="alert alert-success mx-auto " role="alert" align="center"> Hola {this.state.user.displayName}!</div>
         <button className="btn btn-success"onClick={this.handleLogout}>Cerrar sesión</button>
+        
       </div>
+      
       )
+     
     }else {
       //usuario no logeado
       return(
@@ -71,7 +108,7 @@ class App extends Component{
 
   }
 
-
+ 
 
   handleAuth(){
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -95,18 +132,20 @@ class App extends Component{
     return (
       <BrowserRouter>
       <div className="App">
-    
-        <NavBar />
+        {this.state.mostrar?
+          <NavBar /> 
+          :null}
+        
         <br/>
         {this.renderLoginButton()}
       
-        <Route path='/agregar_estudiantes' component={Estudiantes} />
-        <Route path='/agregar_administrativos' component={Administrativos} />
-        <Route path='/agregar_maquinas' component={Maquinas} />
-        <Route path='/agregar_docentes' component={Docentes} />
-        <Route path='/agregar_externos' component={Externos} />
+        <Route path='/agregar_estudiantes' component={this.state.mostrar ? Estudiantes : (this.state.loading ? Cargando : Redirigir)} />
+        <Route path='/agregar_administrativos' component={this.state.mostrar ? Administrativos : (this.state.loading ? Cargando : Redirigir)} />
+        <Route path='/agregar_maquinas' component={this.state.mostrar ? Maquinas : (this.state.loading ? Cargando : Redirigir)} />
+        <Route path='/agregar_docentes' component={this.state.mostrar ? Docentes : (this.state.loading ? Cargando : Redirigir)} />
+        <Route path='/agregar_externos' component={this.state.mostrar ? Externos : (this.state.loading ? Cargando : Redirigir)} />
         <Route path='/' component={Inicio} />
-        <Route path='/page404' component={Page404} />
+        <Route path='/page404' component={this.state.mostrar ? Page404 : (this.state.loading ? Cargando : Redirigir)} />
           
           
         
