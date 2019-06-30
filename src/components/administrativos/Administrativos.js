@@ -12,7 +12,7 @@ import 'firebase/firestore'
 var firebaseConfig = {
     apiKey: "AIzaSyDAO8hd86mmNBqWy8TkeStFZrgq4n35WNM",
     authDomain: "sicaf-49911.firebaseapp.com",
-    databaseURL: "https://sicaf-49911.firebaseio.com",
+    
     projectId: "sicaf-49911",
     storageBucket: "sicaf-49911.appspot.com",
     messagingSenderId: "558849811362",
@@ -52,7 +52,8 @@ class Administrativos extends Component {
         administrativos.push(doc.data())
       })
       this.setState({
-        administrativos: administrativos
+        administrativos: administrativos,
+        todosAdministrativos: administrativos
       })
     }, err => {
       alert(err)
@@ -80,7 +81,16 @@ class Administrativos extends Component {
     document.getElementById("formAdminis").reset();
   }
 
-  
+  filtrar(text){
+    let administrativos = this.state.todosAdministrativos
+
+    let result = administrativos.filter((administrativo) => {
+      return administrativo.codigo.includes(text)
+    })
+
+    this.setState({administrativos: result})
+
+  }
   
   render() {
     return (
@@ -336,13 +346,39 @@ class Administrativos extends Component {
                 <select onChange={(selector) => {
                       this.setState({programa: selector.target.value})
                     }} class="form-control">
-                  <option>Programa Academico</option>
-                  <option>Ingenieria de sistemas y computacion</option>
-                  <option>Lenguas modernas</option>
-                  <option>Ingenieria civil</option>
-                  <option>Ingenieria electronica</option>
-                  <option>Topografía</option>
-                  <option>Economía</option>
+                   <option>Programa Academico</option>
+                    <option>Ingeniería de sistemas y computación</option>
+                    <option>Ingeniería civil</option>
+                    <option>Ingenieria electrónica</option>
+                    <option>Topografía</option>
+                    <option>Obras civiles</option>
+                    <option>Lic. en ciencias naturales</option>
+                    <option>Lic. en educación física</option>
+                    <option>Lic. en literatura</option>
+                    <option>Lenguas modernas</option>
+                    <option>Lic. en matemáticas</option>
+                    <option>Lic. en ciencias sociales</option>
+                    <option>Lic. en pedagogía infantil</option>
+                    <option>Filosofía</option>
+                    <option>Artes visuales</option>
+                    <option>Comunicación social</option>
+                    <option>Trabajo social</option>
+                    <option>Física</option>
+                    <option>Química</option>
+                    <option>Biología</option>
+                    <option>Tecnología en instrumentación electrónica</option>
+                    <option>Administración financiera</option>
+                    <option>Administración de negocios</option>
+                    <option>Contaduría pública</option>
+                    <option>Economía</option>
+                    <option>Medicina</option>
+                    <option>Seguridad y salud en el trabajo</option>
+                    <option>Gerontología</option>
+                    <option>Enfermería</option>
+                    <option>Ingeniería de alimentos</option>
+                    <option>Administración de negocios</option>
+                    <option>Tecnología agropecuaria</option>
+                    <option>Tecnología en procesos agroindustriales</option>
 
                     </select>
                     
@@ -363,7 +399,17 @@ class Administrativos extends Component {
                 </button>
 
             </div>
-            <div className="col-6"><List nombreCollection={'administrativos'} cabecera={['numero','nombre','apellido','codigo']} listado={this.state.administrativos}/></div>
+            <div className="col-6">
+            <input
+                className="form-control mr-sm-2"
+                type="search"
+                placeholder="Codigo"
+                aria-label="Buscar"
+                onChange = {(event) => {
+                  this.filtrar(event.target.value)
+                }}
+              />
+            <List nombreCollection={'administrativos'} cabecera={['numero','nombre','apellido','codigo']} listado={this.state.administrativos}/></div>
           </div>
         </div>
       </div>

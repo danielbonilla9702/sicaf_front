@@ -47,7 +47,8 @@ class Maquinas extends Component {
         maquinas.push(doc.data())
       })
       this.setState({
-        maquinas: maquinas
+        maquinas: maquinas,
+        todosMaquinas: maquinas
       })
     }, err => {
       alert(err)
@@ -68,6 +69,16 @@ class Maquinas extends Component {
     document.getElementById("formMaq").reset();
   }
 
+  filtrar(text){
+    let maquinas = this.state.todosMaquinas
+
+    let result = maquinas.filter((maquina) => {
+      return maquina.codigo.includes(text)
+    })
+
+    this.setState({maquinas: result})
+
+  }
 
   render() {
     return (
@@ -162,7 +173,17 @@ class Maquinas extends Component {
                 </button>
 
             </div>
-            <div className="col-6"><List nombreCollection={'maquinas'} cabecera={['numero','nombre','activa', 'codigo' ]} listado={this.state.maquinas}/></div>
+            <div className="col-6">
+            <input
+                className="form-control mr-sm-2"
+                type="search"
+                placeholder="Codigo"
+                aria-label="Buscar"
+                onChange = {(event) => {
+                  this.filtrar(event.target.value)
+                }}
+              />
+              <List nombreCollection={'maquinas'} cabecera={['numero','nombre','activa', 'codigo' ]} listado={this.state.maquinas}/></div>
           </div>
         </div>
       </div>

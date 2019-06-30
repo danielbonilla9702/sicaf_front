@@ -60,7 +60,7 @@ class NavBar extends Component {
               <li className="nav-item">
                 <a
                   className="nav-link"
-                  href="/page404"
+                  href="/reportes"
                   tabIndex="-1"
                   
                 >
@@ -69,13 +69,7 @@ class NavBar extends Component {
               </li>
             </ul>
             <form className="form-inline my-2 my-lg-0">
-              <input
-                className="form-control mr-sm-2"
-                type="search"
-                placeholder="Codigo"
-                aria-label="Buscar"
-              />
-              <button type="submit" className="btn btn-light my-2 my-sm-0">Buscar</button>
+            <button className="btn btn-success"onClick={this.props.handleLogout}>Cerrar sesión</button>
               
                 
               

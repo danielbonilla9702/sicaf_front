@@ -52,7 +52,8 @@ class Docentes extends Component {
         docentes.push(doc.data())
       })
       this.setState({
-        docentes: docentes
+        docentes: docentes,
+        todosDocentes: docentes
       })
     }, err => {
       alert(err)
@@ -80,7 +81,16 @@ class Docentes extends Component {
     document.getElementById("formDoc").reset();
   }
 
+  filtrar(text){
+    let docentes = this.state.todosDocentes
 
+    let result = docentes.filter((docente) => {
+      return docente.codigo.includes(text)
+    })
+
+    this.setState({docentes: result})
+
+  }
   
   
   render() {
@@ -337,13 +347,39 @@ class Docentes extends Component {
                 <select onChange={(selector) => {
                       this.setState({programa: selector.target.value})
                     }} class="form-control">
-                  <option>Programa Academico</option>
-                  <option>Ingenieria de sistemas y computacion</option>
-                  <option>Lenguas modernas</option>
-                  <option>Ingenieria civil</option>
-                  <option>Ingenieria electronica</option>
-                  <option>Topografía</option>
-                  <option>Economía</option>
+                   <option>Programa Academico</option>
+                    <option>Ingeniería de sistemas y computación</option>
+                    <option>Ingeniería civil</option>
+                    <option>Ingenieria electrónica</option>
+                    <option>Topografía</option>
+                    <option>Obras civiles</option>
+                    <option>Lic. en ciencias naturales</option>
+                    <option>Lic. en educación física</option>
+                    <option>Lic. en literatura</option>
+                    <option>Lenguas modernas</option>
+                    <option>Lic. en matemáticas</option>
+                    <option>Lic. en ciencias sociales</option>
+                    <option>Lic. en pedagogía infantil</option>
+                    <option>Filosofía</option>
+                    <option>Artes visuales</option>
+                    <option>Comunicación social</option>
+                    <option>Trabajo social</option>
+                    <option>Física</option>
+                    <option>Química</option>
+                    <option>Biología</option>
+                    <option>Tecnología en instrumentación electrónica</option>
+                    <option>Administración financiera</option>
+                    <option>Administración de negocios</option>
+                    <option>Contaduría pública</option>
+                    <option>Economía</option>
+                    <option>Medicina</option>
+                    <option>Seguridad y salud en el trabajo</option>
+                    <option>Gerontología</option>
+                    <option>Enfermería</option>
+                    <option>Ingeniería de alimentos</option>
+                    <option>Administración de negocios</option>
+                    <option>Tecnología agropecuaria</option>
+                    <option>Tecnología en procesos agroindustriales</option>
 
                     </select>
                     
@@ -364,7 +400,17 @@ class Docentes extends Component {
                 </button>
 
             </div>
-            <div className="col-6"><List nombreCollection={'docentes'} cabecera={['numero','nombre','apellido','codigo']} listado={this.state.docentes}/></div>
+            <div className="col-6">
+            <input
+                className="form-control mr-sm-2"
+                type="search"
+                placeholder="Codigo"
+                aria-label="Buscar"
+                onChange = {(event) => {
+                  this.filtrar(event.target.value)
+                }}
+              />
+            <List nombreCollection={'docentes'} cabecera={['numero','nombre','apellido','codigo']} listado={this.state.docentes}/></div>
           </div>
         </div>
       </div>

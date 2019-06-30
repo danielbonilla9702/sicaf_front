@@ -1,6 +1,6 @@
 
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -8,12 +8,13 @@ import './App.css';
 
 import Estudiantes from './components/estudiantes/Estudiantes';
 import NavBar from './components/navBar/NavBar';
-import Page404 from './components/page404/Page404';
+
 import Maquinas from './components/maquinas/Maquinas';
 import Administrativos from './components/administrativos/Administrativos';
 import Docentes from './components/docentes/Docentes';
 import Inicio from './components/inicio/Inicio';
 import Externos from './components/externos/Externos';
+import Reportes from './components/reportes/Reportes';
 
 
 import * as firebase from "firebase/firebase";
@@ -31,7 +32,7 @@ var firebaseConfig = {
 if(!firebase.apps.length)
   firebase.initializeApp(firebaseConfig);
 
-let firestore = firebase.firestore();
+
 
 class Redirigir extends Component{
   render(){
@@ -62,7 +63,6 @@ class App extends Component{
    loading: true
   };
  this.handleAuth = this.handleAuth.bind(this);
- this.handleLogout = this.handleLogout.bind(this);
  this.renderLoginButton = this.renderLoginButton.bind(this);
   }
 
@@ -85,14 +85,13 @@ class App extends Component{
         //usuario logeado
       return(
         
-      <div align="center">
+      <div align="center" className = "container">
        {/* <div className="mt--10">{!this.state.mostrar?
           <NavBar /> 
           :null}
           </div> */}
-        <img width="150px" height="150px" src={this.state.user.photoURL} className="rounded mx-auto d-block md-2" alt={this.state.user.displayName} />
+        <img width="150px" height="150px" src={this.state.user.photoURL} className="mb-4 rounded mx-auto d-block md-2" alt={this.state.user.displayName} />
         <div className="alert alert-success mx-auto " role="alert" align="center"> Hola {this.state.user.displayName}!</div>
-        <button className="btn btn-success"onClick={this.handleLogout}>Cerrar sesión</button>
         
       </div>
       
@@ -119,7 +118,7 @@ class App extends Component{
 
   }
 
-  handleLogout(){
+  handleLogout = () => {
 
     firebase.auth().signOut()
     .then(result => console.log(`${result.user.email} ha cerrado sesión`))
@@ -133,21 +132,21 @@ class App extends Component{
       <BrowserRouter>
       <div className="App">
         {this.state.mostrar?
-          <NavBar /> 
+          <NavBar handleLogout = {this.handleLogout}/> 
           :null}
         
         <br/>
         {this.renderLoginButton()}
       
+        <Route exact path = '/' component={Inicio} />
         <Route path='/agregar_estudiantes' component={this.state.mostrar ? Estudiantes : (this.state.loading ? Cargando : Redirigir)} />
         <Route path='/agregar_administrativos' component={this.state.mostrar ? Administrativos : (this.state.loading ? Cargando : Redirigir)} />
         <Route path='/agregar_maquinas' component={this.state.mostrar ? Maquinas : (this.state.loading ? Cargando : Redirigir)} />
         <Route path='/agregar_docentes' component={this.state.mostrar ? Docentes : (this.state.loading ? Cargando : Redirigir)} />
         <Route path='/agregar_externos' component={this.state.mostrar ? Externos : (this.state.loading ? Cargando : Redirigir)} />
-        <Route path='/' component={Inicio} />
-        <Route path='/page404' component={this.state.mostrar ? Page404 : (this.state.loading ? Cargando : Redirigir)} />
+        <Route path='/reportes' component={this.state.mostrar ? Reportes : (this.state.loading ? Cargando : Redirigir)} />
           
-          
+        
         
          
         

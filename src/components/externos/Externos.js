@@ -52,7 +52,8 @@ class Externos extends Component {
         externos.push(doc.data())
       })
       this.setState({
-        externos: externos
+        externos: externos,
+        todosExternos: externos
       })
     }, err => {
       alert(err)
@@ -80,7 +81,16 @@ class Externos extends Component {
     document.getElementById("formExterno").reset();
   }
 
+  filtrar(text){
+    let externos = this.state.todosExternos
 
+    let result = externos.filter((externo) => {
+      return externo.codigo.includes(text)
+    })
+
+    this.setState({externos: result})
+
+  }
   
   
   render() {
@@ -348,7 +358,17 @@ class Externos extends Component {
                 </button>
 
             </div>
-            <div className="col-6"><List nombreCollection={'externos'} cabecera={['numero','nombre','apellido','codigo']} listado={this.state.externos}/></div>
+            <div className="col-6">
+            <input
+                className="form-control mr-sm-2"
+                type="search"
+                placeholder="Codigo"
+                aria-label="Buscar"
+                onChange = {(event) => {
+                  this.filtrar(event.target.value)
+                }}
+              />
+            <List nombreCollection={'externos'} cabecera={['numero','nombre','apellido','codigo']} listado={this.state.externos}/></div>
           </div>
         </div>
       </div>

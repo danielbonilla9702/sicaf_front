@@ -58,7 +58,10 @@ class List extends Component{
             <th scope="col">{itemCabecera}</th>
           )
         })
+        
       }
+
+      <th scope="col">Eliminar</th>
 
     </tr>
   </thead>
