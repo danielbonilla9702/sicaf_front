@@ -78,7 +78,7 @@ class App extends Component{
       
     });
   }
-
+ 
   renderLoginButton(){
    
     if(this.state.user){

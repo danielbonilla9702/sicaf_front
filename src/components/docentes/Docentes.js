@@ -109,10 +109,10 @@ class Docentes extends Component {
                     onChange = {(text) => {
                       this.setState({nombre: text.target.value})
                     }}
-                    type="Nombre"
+                    type="text"
                     className="form-control"
                     id="nombre"
-                    placeholder="Nombre"
+                    placeholder="Nombre" required pattern="[A-Za-z ]+"
                   />
                 </div>
                 <div className="form-group">
@@ -122,7 +122,7 @@ class Docentes extends Component {
                     type="text"
                     className="form-control"
                     id="apellido"
-                    placeholder="Apellido"
+                    placeholder="Apellido" required pattern="[A-Za-z ]+"
                   />
                 
                 </div>
@@ -135,7 +135,7 @@ class Docentes extends Component {
                     className="form-control"
                     id="email"
                     aria-describedby="emailHelp"
-                    placeholder="Email"
+                    placeholder="E-mail"
                   />
                   <small id="emailHelp" className="form-text text-muted">
                     Correo institucional.
@@ -147,13 +147,13 @@ class Docentes extends Component {
                    onChange = {(text) => {
                       this.setState({codigo: text.target.value})
                     }}
-                    type="text"
+                    type="number"
                     className="form-control"
                     id="id"
-                    placeholder="Código"
+                    placeholder="Código" required
                   />
                   <small id="idHelp" className="form-text text-muted">
-                    CC ó TI.
+                    C.C. ó T.I.
                   </small>
                 </div>
                 <div className="form-group">
@@ -161,10 +161,10 @@ class Docentes extends Component {
                    onChange = {(text) => {
                       this.setState({edad: text.target.value})
                     }}
-                    type="text"
+                    type="number"
                     className="form-control"
                     id="edad"
-                    placeholder="Edad"
+                    placeholder="Edad" min="8" max="99"
                   />
                   </div>
                   <label>Tipo de sangre</label>
@@ -404,7 +404,7 @@ class Docentes extends Component {
             <input
                 className="form-control mr-sm-2"
                 type="search"
-                placeholder="Codigo"
+                placeholder="Código"
                 aria-label="Buscar"
                 onChange = {(event) => {
                   this.filtrar(event.target.value)

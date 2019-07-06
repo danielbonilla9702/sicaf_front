@@ -7,7 +7,7 @@ class Inicio extends Component{
     render(){
         return (
             <div className="text-center"><img className="img-thumbnail mt-5" alt="logo bienestar" src={logo}/>
-            <h1>Bienvenido al centro de acondicionamiento fisico (CAF)</h1>
+            <h1>Bienvenido al Centro de Acondicionamiento Físico (CAF)</h1>
             </div>
             
 

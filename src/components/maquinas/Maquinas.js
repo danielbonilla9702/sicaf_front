@@ -90,15 +90,15 @@ class Maquinas extends Component {
           <div className="row">
             <div className="col-6">
               <form id="formMaq" className="mt-5">
-              <label> Agregar Maquinas</label>
+              <label> Agregar Máquinas</label>
                 <div className="form-group">
                   <input
                     onChange = {(text) => {
                       this.setState({nombre: text.target.value})
                     }}
-                    type="Nombre"
+                    type="text"
                     className="form-control"
-                    id="nombre"
+                    id="nombre" required pattern="[A-Za-z ]+"
                     placeholder="Nombre"
                   />
                 </div>
@@ -107,10 +107,10 @@ class Maquinas extends Component {
                    onChange = {(text) => {
                       this.setState({codigo: text.target.value})
                     }}
-                    type="text"
+                    type="number"
                     className="form-control"
                     id="codigo"
-                    placeholder="Código"
+                    placeholder="Código" required
                   />
                   <small id="idHelp" className="form-text text-muted">
                     CC ó TI.
